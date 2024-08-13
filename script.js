@@ -4,8 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const xmlOutput = document.getElementById('xml-output');
     const saveBtn = document.getElementById('save-btn');
     const deviceSelect = document.getElementById('device-select');
-    const deviceImage = document.getElementById('device-image');
-
+    const devicePhone = document.getElementById('device-phone');
+    const deviceTablet = document.getElementById('device-tablet');
+    
     componentList.addEventListener('dragstart', (e) => {
         e.dataTransfer.setData('text/plain', e.target.dataset.component);
     });
@@ -25,7 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
     saveBtn.addEventListener('click', saveXML);
 
     deviceSelect.addEventListener('change', (e) => {
-        deviceImage.src = `%PUBLIC_URL%/${e.target.value}.png`;
+        devicePhone.src = `%PUBLIC_URL%/${e.target.value}.png`;
+        deviceTablet.src = `%PUBLIC_URL%/${e.target.value}.png`;
     });
 
     function createComponent(type, x, y) {
