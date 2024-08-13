@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveBtn = document.getElementById('save-btn');
     const deviceSelect = document.getElementById('device-select');
     const devicePhone = document.getElementById('device-phone');
-    const deviceTablet = document.getElementById('device-tablet');
+    
     
     componentList.addEventListener('dragstart', (e) => {
         e.dataTransfer.setData('text/plain', e.target.dataset.component);
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     deviceSelect.addEventListener('change', (e) => {
         devicePhone.src = `%PUBLIC_URL%/${e.target.value}.png`;
-        deviceTablet.src = `%PUBLIC_URL%/${e.target.value}.png`;
+        
     });
 
     function createComponent(type, x, y) {
