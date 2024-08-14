@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import phoneImage from './phone.png';
-import tabletImage from './tablet.png';
+import phoneImage from '../public/phone.png';
+import tabletImage from '../public/tablet.png';
 
 function App() {
   const [components, setComponents] = useState([]);
