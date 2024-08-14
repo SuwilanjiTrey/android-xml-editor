@@ -1,15 +1,17 @@
 {
   "files": {
-    "main.css": "/android-xml-editor/static/css/main.d9ff0908.css",
-    "main.js": "/android-xml-editor/static/js/main.73521dfb.js",
+    "main.css": "/android-xml-editor/static/css/main.c0ffb1e5.css",
+    "main.js": "/android-xml-editor/static/js/main.d85e58c8.js",
     "static/js/453.9e9bae50.chunk.js": "/android-xml-editor/static/js/453.9e9bae50.chunk.js",
+    "static/media/tablet.png": "/android-xml-editor/static/media/tablet.934bc27435e4e3eaf87b.png",
+    "static/media/phone.png": "/android-xml-editor/static/media/phone.b30238f70c47f67b89d1.png",
     "index.html": "/android-xml-editor/index.html",
-    "main.d9ff0908.css.map": "/android-xml-editor/static/css/main.d9ff0908.css.map",
-    "main.73521dfb.js.map": "/android-xml-editor/static/js/main.73521dfb.js.map",
+    "main.c0ffb1e5.css.map": "/android-xml-editor/static/css/main.c0ffb1e5.css.map",
+    "main.d85e58c8.js.map": "/android-xml-editor/static/js/main.d85e58c8.js.map",
     "453.9e9bae50.chunk.js.map": "/android-xml-editor/static/js/453.9e9bae50.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d9ff0908.css",
-    "static/js/main.73521dfb.js"
+    "static/css/main.c0ffb1e5.css",
+    "static/js/main.d85e58c8.js"
   ]
 }
