@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const deviceSelect = document.getElementById('device-select');
     const devicePhone = document.getElementById('device-image');
     
-    
     componentList.addEventListener('dragstart', (e) => {
         e.dataTransfer.setData('text/plain', e.target.dataset.component);
     });
@@ -25,9 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     saveBtn.addEventListener('click', saveXML);
 
+    // Updated code to correctly set the image source
     deviceSelect.addEventListener('change', (e) => {
-        devicePhone.src = `%PUBLIC_URL%/${e.target.value}.png`;
-        
+        devicePhone.src = `${e.target.value}.png`;
     });
 
     function createComponent(type, x, y) {
