@@ -41,7 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
         component.attributesData = getDefaultAttributes(type);
 
         component.addEventListener('click', () => {
+            if (selectedComponent) {
+                selectedComponent.classList.remove('selected');
+            }
             selectedComponent = component;
+            component.classList.add('selected');
             updateAttributeEditor(component.attributesData);
         });
 
@@ -105,4 +109,15 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Saving XML:', xmlOutput.value);
         alert('XML saved! (Check the console)');
     }
+
+    // Clear selection when clicking outside components
+    componentContainer.addEventListener('click', (e) => {
+        if (e.target === componentContainer) {
+            if (selectedComponent) {
+                selectedComponent.classList.remove('selected');
+            }
+            selectedComponent = null;
+            attributeEditor.innerHTML = '';
+        }
+    });
 });
