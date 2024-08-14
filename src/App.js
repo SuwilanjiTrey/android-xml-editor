@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import phoneImage from './phone.png';
+import tabletImage from './tablet.png';
 
 function App() {
   const [components, setComponents] = useState([]);
   const [xmlOutput, setXmlOutput] = useState('');
   const [deviceType, setDeviceType] = useState('phone');
+  const [selectedComponent, setSelectedComponent] = useState(null);
 
   useEffect(() => {
     updateXmlOutput();
@@ -25,15 +28,34 @@ function App() {
       type: componentType,
       x: e.nativeEvent.offsetX,
       y: e.nativeEvent.offsetY,
+      attributes: getDefaultAttributes(componentType)
     };
     setComponents([...components, newComponent]);
+  };
+
+  const getDefaultAttributes = (componentType) => {
+    switch(componentType) {
+      case 'TextView':
+        return { text: 'New TextView', textSize: '14sp' };
+      case 'Button':
+        return { text: 'New Button' };
+      case 'RecyclerView':
+        return { orientation: 'vertical' };
+      default:
+        return {};
+    }
   };
 
   const updateXmlOutput = () => {
     let xmlString = '<LinearLayout\n    android:layout_width="match_parent"\n    android:layout_height="match_parent"\n    android:orientation="vertical">\n\n';
     
     components.forEach((component) => {
-      xmlString += `    <${component.type}\n        android:layout_width="wrap_content"\n        android:layout_height="wrap_content"\n        android:layout_x="${component.x}"\n        android:layout_y="${component.y}" />\n\n`;
+      xmlString += `    <${component.type}\n`;
+      Object.entries(component.attributes).forEach(([key, value]) => {
+        xmlString += `        android:${key}="${value}"\n`;
+      });
+      xmlString += `        android:layout_x="${component.x}"\n`;
+      xmlString += `        android:layout_y="${component.y}" />\n\n`;
     });
 
     xmlString += '</LinearLayout>';
@@ -43,6 +65,22 @@ function App() {
   const saveXML = () => {
     console.log('Saving XML:', xmlOutput);
     alert('XML saved! (Check the console)');
+  };
+
+  const handleComponentClick = (component) => {
+    setSelectedComponent(component);
+  };
+
+  const handleAttributeChange = (attribute, value) => {
+    if (selectedComponent) {
+      const updatedComponents = components.map(comp => 
+        comp === selectedComponent 
+          ? { ...comp, attributes: { ...comp.attributes, [attribute]: value } }
+          : comp
+      );
+      setComponents(updatedComponents);
+      setSelectedComponent({ ...selectedComponent, attributes: { ...selectedComponent.attributes, [attribute]: value } });
+    }
   };
 
   return (
@@ -69,7 +107,7 @@ function App() {
         <main id="device-preview">
           <img 
             id="device-image" 
-            src={`/${deviceType}.png`} 
+            src={deviceType === 'phone' ? phoneImage : tabletImage} 
             alt="Device Preview"
           />
           <div 
@@ -86,6 +124,7 @@ function App() {
                   left: `${component.x}px`,
                   top: `${component.y}px`,
                 }}
+                onClick={() => handleComponentClick(component)}
               >
                 {component.type}
               </div>
@@ -95,7 +134,21 @@ function App() {
         <aside id="right-sidebar">
           <h2>Attributes</h2>
           <div id="attribute-editor">
-            {/* Attribute editor will be implemented here */}
+            {selectedComponent && (
+              <>
+                <h3>{selectedComponent.type} Attributes</h3>
+                {Object.entries(selectedComponent.attributes).map(([key, value]) => (
+                  <div key={key}>
+                    <label>{key}: </label>
+                    <input 
+                      type="text" 
+                      value={value} 
+                      onChange={(e) => handleAttributeChange(key, e.target.value)}
+                    />
+                  </div>
+                ))}
+              </>
+            )}
           </div>
         </aside>
       </div>
