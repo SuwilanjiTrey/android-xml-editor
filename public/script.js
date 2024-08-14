@@ -5,7 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveBtn = document.getElementById('save-btn');
     const deviceSelect = document.getElementById('device-select');
     const devicePhone = document.getElementById('device-image');
-    
+    const attributeEditor = document.getElementById('attribute-editor');
+
+    let selectedComponent = null;
+
     componentList.addEventListener('dragstart', (e) => {
         e.dataTransfer.setData('text/plain', e.target.dataset.component);
     });
@@ -24,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     saveBtn.addEventListener('click', saveXML);
 
-    // Updated code to correctly set the image source
     deviceSelect.addEventListener('change', (e) => {
         devicePhone.src = `${e.target.value}.png`;
     });
@@ -36,14 +38,62 @@ document.addEventListener('DOMContentLoaded', () => {
         component.style.left = `${x}px`;
         component.style.top = `${y}px`;
         component.textContent = type;
+        component.attributesData = getDefaultAttributes(type);
+
+        component.addEventListener('click', () => {
+            selectedComponent = component;
+            updateAttributeEditor(component.attributesData);
+        });
+
         return component;
+    }
+
+    function getDefaultAttributes(type) {
+        switch(type) {
+            case 'TextView':
+                return { text: 'New TextView', textSize: '14sp' };
+            case 'Button':
+                return { text: 'New Button' };
+            case 'RecyclerView':
+                return { orientation: 'vertical' };
+            default:
+                return {};
+        }
+    }
+
+    function updateAttributeEditor(attributes) {
+        attributeEditor.innerHTML = '';
+        for (const [key, value] of Object.entries(attributes)) {
+            const attributeDiv = document.createElement('div');
+            attributeDiv.innerHTML = `
+                <label>${key}</label>
+                <input type="text" value="${value}" data-attribute="${key}">
+            `;
+            attributeEditor.appendChild(attributeDiv);
+        }
+
+        attributeEditor.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', (e) => {
+                const attributeName = e.target.getAttribute('data-attribute');
+                const attributeValue = e.target.value;
+                if (selectedComponent) {
+                    selectedComponent.attributesData[attributeName] = attributeValue;
+                    updateXmlOutput();
+                }
+            });
+        });
     }
 
     function updateXmlOutput() {
         let xmlString = '<LinearLayout\n    android:layout_width="match_parent"\n    android:layout_height="match_parent"\n    android:orientation="vertical">\n\n';
         
         componentContainer.childNodes.forEach((component) => {
-            xmlString += `    <${component.textContent}\n        android:layout_width="wrap_content"\n        android:layout_height="wrap_content"\n        android:layout_x="${component.style.left}"\n        android:layout_y="${component.style.top}" />\n\n`;
+            xmlString += `    <${component.textContent}\n`;
+            for (const [key, value] of Object.entries(component.attributesData)) {
+                xmlString += `        android:${key}="${value}"\n`;
+            }
+            xmlString += `        android:layout_x="${component.style.left}"\n`;
+            xmlString += `        android:layout_y="${component.style.top}" />\n\n`;
         });
 
         xmlString += '</LinearLayout>';
