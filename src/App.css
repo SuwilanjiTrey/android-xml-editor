@@ -68,4 +68,29 @@ footer {
   padding: 5px;
   background-color: rgba(200, 200, 200, 0.5);
   border: 1px solid #999;
+  cursor: pointer;
+}
+
+.component:hover {
+  background-color: rgba(180, 180, 180, 0.7);
+}
+
+#attribute-editor {
+  padding: 10px;
+}
+
+#attribute-editor h3 {
+  margin-top: 0;
+}
+
+#attribute-editor label {
+  display: inline-block;
+  width: 100px;
+  margin-bottom: 5px;
+}
+
+#attribute-editor input {
+  width: calc(100% - 110px);
+  padding: 2px 5px;
+  margin-bottom: 5px;
 }
