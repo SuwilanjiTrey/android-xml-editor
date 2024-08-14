@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const xmlOutput = document.getElementById('xml-output');
     const saveBtn = document.getElementById('save-btn');
     const deviceSelect = document.getElementById('device-select');
-    const devicePhone = document.getElementById('device-phone');
+    const devicePhone = document.getElementById('device-image');
     
     
     componentList.addEventListener('dragstart', (e) => {
