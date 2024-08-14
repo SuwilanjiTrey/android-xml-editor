@@ -87,9 +87,12 @@ function App() {
     <div className="App">
       <nav id="top-nav">
         <select 
-          value={deviceType} 
-          onChange={(e) => setDeviceType(e.target.value)}
-        >
+  value={deviceType} 
+  onChange={(e) => {
+    setDeviceType(e.target.value);
+    console.log(e.target.value);  // Log the selected device type
+  }}
+>
           <option value="phone">Phone</option>
           <option value="tablet">Tablet</option>
         </select>
@@ -105,11 +108,13 @@ function App() {
           </ul>
         </aside>
         <main id="device-preview">
-          <img 
-            id="device-image" 
-            src={deviceType === 'phone' ? phoneImage : tabletImage} 
-            alt="Device Preview"
-          />
+         <img 
+  id="device-image" 
+  src={deviceType === 'phone' ? phoneImage : tabletImage} 
+  alt="Device Preview"
+/>
+{console.log(deviceType === 'phone' ? phoneImage : tabletImage)}  // Log the image path
+
           <div 
             id="component-container"
             onDragOver={handleDragOver}
