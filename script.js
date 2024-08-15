@@ -29,8 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+
     componentContainer.addEventListener('dragover', (e) => {
         e.preventDefault();
+    });
+
+    //change here 
+    deviceSelect.addEventListener('change', (e) => {
+        devicePhone.src = `${e.target.value}.png`;
     });
 
     componentContainer.addEventListener('drop', (e) => {
