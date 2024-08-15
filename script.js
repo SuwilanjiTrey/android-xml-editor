@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let selectedComponent = null;
 
+    // Define default attributes for each component type
     const defaultAttributes = {
         Button: { text: 'Button', textSize: '14sp', layout_width: 'wrap_content', layout_height: 'wrap_content' },
         TextView: { text: 'TextView', textSize: '14sp', layout_width: 'wrap_content', layout_height: 'wrap_content' },
@@ -30,15 +31,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+
     componentContainer.addEventListener('dragover', (e) => {
         e.preventDefault();
     });
 
+    //change here 
     deviceSelect.addEventListener('change', (e) => {
         devicePhone.src = `${e.target.value}.png`;
-
+        
         const componentContainer = document.getElementById('component-container');
-
+        
         if (e.target.value === 'phone') {
             componentContainer.style.position = 'absolute';
             componentContainer.style.top = '16.5%';
@@ -47,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             componentContainer.style.height = '66.5%';
             componentContainer.style.border = '1px solid #ccc';
         } else if (e.target.value === 'tablet') {
+            // Reset to default styles if needed when not a tablet
             componentContainer.style.position = 'absolute';
             componentContainer.style.top = '21.5%';
             componentContainer.style.left = '27.64%';
@@ -54,14 +58,16 @@ document.addEventListener('DOMContentLoaded', () => {
             componentContainer.style.height = '57.5%';
             componentContainer.style.border = '1px solid #ccc';
         } else {
+            // Reset to default styles if needed when not a tablet
             componentContainer.style.position = 'absolute';
             componentContainer.style.top = '0px';
             componentContainer.style.left = '0px';
             componentContainer.style.width = '0px';
-            componentContainer.style.height = '0px';
+            componentContainer.style.height = 'opx';
             componentContainer.style.border = '1px solid #ccc';
         }
     });
+    
 
     componentContainer.addEventListener('drop', (e) => {
         e.preventDefault();
@@ -72,86 +78,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function createComponent(type, x, y) {
-        let component;
-
-        switch(type) {
-            case 'Button':
-                component = document.createElement('button');
-                component.textContent = 'Button';
-                break;
-            case 'TextView':
-                component = document.createElement('span');
-                component.textContent = 'TextView';
-                break;
-            case 'ImageView':
-                component = document.createElement('img');
-                component.src = 'image_placeholder.png';
-                component.alt = 'ImageView';
-                break;
-            case 'PlainText':
-                component = document.createElement('input');
-                component.type = 'text';
-                component.placeholder = 'Enter text';
-                break;
-            case 'Password':
-                component = document.createElement('input');
-                component.type = 'password';
-                component.placeholder = 'Enter password';
-                break;
-            case 'Email':
-                component = document.createElement('input');
-                component.type = 'email';
-                component.placeholder = 'Enter email';
-                break;
-            case 'ProgressBar':
-                component = document.createElement('progress');
-                break;
-            case 'SeekBar':
-                component = document.createElement('input');
-                component.type = 'range';
-                break;
-            case 'RatingBar':
-                component = document.createElement('input');
-                component.type = 'number';
-                component.max = 5;
-                break;
-            default:
-                component = document.createElement('div');
-                component.textContent = type;
-        }
-
+        const component = document.createElement('div');
         component.className = 'component';
         component.style.position = 'absolute';
         component.style.left = `${x}px`;
         component.style.top = `${y}px`;
+        component.textContent = type;
         component.dataset.componentType = type;
-
-        // Set default attributes
-        component.attributesData = { ...defaultAttributes[type], layout_width: '100px', layout_height: '50px' };
-
-        // Make the component resizable using Interact.js
-        interact(component).resizable({
-            edges: { left: true, right: true, bottom: true, top: true },
-            listeners: {
-                move(event) {
-                    let { x, y } = event.target.dataset;
-
-                    x = (parseFloat(x) || 0) + event.deltaRect.left;
-                    y = (parseFloat(y) || 0) + event.deltaRect.top;
-
-                    event.target.style.width = `${event.rect.width}px`;
-                    event.target.style.height = `${event.rect.height}px`;
-
-                    event.target.dataset.x = x;
-                    event.target.dataset.y = y;
-
-                    component.attributesData.layout_width = `${event.rect.width}px`;
-                    component.attributesData.layout_height = `${event.rect.height}px`;
-
-                    updateXmlOutput();
-                }
-            }
-        });
+        component.attributesData = { ...defaultAttributes[type] };
 
         component.addEventListener('click', () => {
             if (selectedComponent) {
@@ -190,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateXmlOutput() {
         let xmlString = '<LinearLayout\n    android:layout_width="match_parent"\n    android:layout_height="match_parent"\n    android:orientation="vertical">\n\n';
-
+        
         componentContainer.childNodes.forEach((component) => {
             xmlString += `    <${component.dataset.componentType}\n`;
             for (const [key, value] of Object.entries(component.attributesData)) {
@@ -209,6 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('XML saved! (Check the console)');
     });
 
+    // Clear selection when clicking outside components
     componentContainer.addEventListener('click', (e) => {
         if (e.target === componentContainer) {
             if (selectedComponent) {
