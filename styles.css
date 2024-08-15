@@ -44,14 +44,17 @@ aside {
 }
 
 #component-container {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 0px;
-    height: 0px;
-    border: 1px solid #ccc;
+    position: relative;
+    min-height: 300px;  /* or whatever minimum height you want */
 }
-
+.component-visual {
+    font-family: monospace;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
 #component-list li {
     cursor: move;
     padding: 5px;
@@ -77,6 +80,25 @@ footer {
     border: 1px solid #ccc;
     cursor: move;
 }
+
+.component {
+    min-width: 50px;
+    min-height: 30px;
+    position: relative;
+}
+
+.resize-handle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #00000050;
+    border-radius: 50%;
+}
+
+.resize-handle.nw { top: -5px; left: -5px; cursor: nw-resize; }
+.resize-handle.ne { top: -5px; right: -5px; cursor: ne-resize; }
+.resize-handle.sw { bottom: -5px; left: -5px; cursor: sw-resize; }
+.resize-handle.se { bottom: -5px; right: -5px; cursor: se-resize; }
 
 .component.selected {
     border: 2px solid blue;
