@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let selectedComponent = null;
 
-    // Define default attributes for each component type
     const defaultAttributes = {
         Button: { text: 'Button', textSize: '14sp', layout_width: 'wrap_content', layout_height: 'wrap_content' },
         TextView: { text: 'TextView', textSize: '14sp', layout_width: 'wrap_content', layout_height: 'wrap_content' },
@@ -37,9 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     deviceSelect.addEventListener('change', (e) => {
         devicePhone.src = `${e.target.value}.png`;
-        
+
         const componentContainer = document.getElementById('component-container');
-        
+
         if (e.target.value === 'phone') {
             componentContainer.style.position = 'absolute';
             componentContainer.style.top = '16.5%';
@@ -72,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateXmlOutput();
     });
 
-    // Function to create component with Interact.js for resizing and make functional components
     function createComponent(type, x, y) {
         let component;
 
@@ -141,19 +139,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     x = (parseFloat(x) || 0) + event.deltaRect.left;
                     y = (parseFloat(y) || 0) + event.deltaRect.top;
 
-                    // Update the size and position of the component
                     event.target.style.width = `${event.rect.width}px`;
                     event.target.style.height = `${event.rect.height}px`;
 
                     event.target.dataset.x = x;
                     event.target.dataset.y = y;
 
-                    // Update component attributes dynamically
-                    const component = event.target;
                     component.attributesData.layout_width = `${event.rect.width}px`;
                     component.attributesData.layout_height = `${event.rect.height}px`;
 
-                    // Update XML output
                     updateXmlOutput();
                 }
             }
@@ -196,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateXmlOutput() {
         let xmlString = '<LinearLayout\n    android:layout_width="match_parent"\n    android:layout_height="match_parent"\n    android:orientation="vertical">\n\n';
-        
+
         componentContainer.childNodes.forEach((component) => {
             xmlString += `    <${component.dataset.componentType}\n`;
             for (const [key, value] of Object.entries(component.attributesData)) {

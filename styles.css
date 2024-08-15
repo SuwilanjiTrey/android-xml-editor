@@ -51,6 +51,17 @@ aside {
     height: 0px;
     border: 1px solid #ccc;
 }
+.component {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f9f9f9;
+    cursor: move;
+}
+
+.selected {
+    border: 2px solid #007bff;
+}
+
 
 #component-list li {
     cursor: move;
