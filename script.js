@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const xmlOutput = document.getElementById('xml-output');
     const saveBtn = document.getElementById('save-btn');
     const attributeEditor = document.getElementById('attribute-editor');
+    const deviceSelect = document.getElementById('device-select');
+    const devicePhone = document.getElementById('device-image');
 
     let selectedComponent = null;
 
@@ -37,7 +39,35 @@ document.addEventListener('DOMContentLoaded', () => {
     //change here 
     deviceSelect.addEventListener('change', (e) => {
         devicePhone.src = `${e.target.value}.png`;
+        
+        const componentContainer = document.getElementById('component-container');
+        
+        if (e.target.value === 'phone') {
+            componentContainer.style.position = 'absolute';
+            componentContainer.style.top = '16.5%';
+            componentContainer.style.left = '32%';
+            componentContainer.style.width = '35.5%';
+            componentContainer.style.height = '66.5%';
+            componentContainer.style.border = '1px solid #ccc';
+        } else if (e.target.value === 'tablet') {
+            // Reset to default styles if needed when not a tablet
+            componentContainer.style.position = 'absolute';
+            componentContainer.style.top = '20.5%';
+            componentContainer.style.left = '27.64%';
+            componentContainer.style.width = '44.5%';
+            componentContainer.style.height = '58.5%';
+            componentContainer.style.border = '1px solid #ccc';
+        } else {
+            // Reset to default styles if needed when not a tablet
+            componentContainer.style.position = 'absolute';
+            componentContainer.style.top = '0px';
+            componentContainer.style.left = '0px';
+            componentContainer.style.width = '0px';
+            componentContainer.style.height = 'opx';
+            componentContainer.style.border = '1px solid #ccc';
+        }
     });
+    
 
     componentContainer.addEventListener('drop', (e) => {
         e.preventDefault();
