@@ -33,6 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
     });
 
+    deviceSelect.addEventListener('change', (e) => {
+        devicePhone.src = `${e.target.value}.png`;
+    });
+
     componentContainer.addEventListener('drop', (e) => {
         e.preventDefault();
         const componentType = e.dataTransfer.getData('text');
