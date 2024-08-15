@@ -70,3 +70,33 @@ footer {
     height: 100px;
     resize: vertical;
 }
+.component {
+    padding: 5px;
+    margin: 2px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: move;
+}
+
+.component.selected {
+    border: 2px solid blue;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+#components-bar {
+    display: flex;
+    flex-direction: column;
+}
+
+.component-category {
+    margin-bottom: 10px;
+}
+
+#attribute-editor {
+    display: flex;
+    flex-direction: column;
+}
+
+#attribute-editor > div {
+    margin-bottom: 5px;
+}
