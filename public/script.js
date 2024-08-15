@@ -45,17 +45,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.value === 'phone') {
             componentContainer.style.position = 'absolute';
             componentContainer.style.top = '16.5%';
-            componentContainer.style.left = '32%';
-            componentContainer.style.width = '35.5%';
+            componentContainer.style.left = '31.58%';
+            componentContainer.style.width = '35.56%';
             componentContainer.style.height = '66.5%';
             componentContainer.style.border = '1px solid #ccc';
         } else if (e.target.value === 'tablet') {
             // Reset to default styles if needed when not a tablet
             componentContainer.style.position = 'absolute';
-            componentContainer.style.top = '20.5%';
+            componentContainer.style.top = '21.5%';
             componentContainer.style.left = '27.64%';
             componentContainer.style.width = '44.5%';
-            componentContainer.style.height = '58.5%';
+            componentContainer.style.height = '57.5%';
             componentContainer.style.border = '1px solid #ccc';
         } else {
             // Reset to default styles if needed when not a tablet
