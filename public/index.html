@@ -18,12 +18,38 @@
         <div id="main-content">
             <aside id="left-sidebar">
                 <h2>Components</h2>
-                <ul id="component-list">
-                    <li draggable="true" data-component="TextView">TextView</li>
-                    <li draggable="true" data-component="Button">Button</li>
-                    <li draggable="true" data-component="RecyclerView">RecyclerView</li>
-                    <!-- Add more components as needed -->
-                </ul>
+                <div id="components-bar">
+                    <div class="component-category">
+                      <h3>Common</h3>
+                      <div class="component" draggable="true" data-component-type="Button">Button</div>
+                      <div class="component" draggable="true" data-component-type="TextView">TextView</div>
+                      <div class="component" draggable="true" data-component-type="ImageView">ImageView</div>
+                    </div>
+                    <div class="component-category">
+                      <h3>Text</h3>
+                      <div class="component" draggable="true" data-component-type="PlainText">Plain Text</div>
+                      <div class="component" draggable="true" data-component-type="Password">Password</div>
+                      <div class="component" draggable="true" data-component-type="Email">E-mail</div>
+                    </div>
+                    <div class="component-category">
+                      <h3>Buttons</h3>
+                      <div class="component" draggable="true" data-component-type="Button">Button</div>
+                      <div class="component" draggable="true" data-component-type="ImageButton">ImageButton</div>
+                      <div class="component" draggable="true" data-component-type="CheckBox">CheckBox</div>
+                    </div>
+                    <div class="component-category">
+                      <h3>Widgets</h3>
+                      <div class="component" draggable="true" data-component-type="ProgressBar">ProgressBar</div>
+                      <div class="component" draggable="true" data-component-type="SeekBar">SeekBar</div>
+                      <div class="component" draggable="true" data-component-type="RatingBar">RatingBar</div>
+                    </div>
+                    <div class="component-category">
+                      <h3>Layouts</h3>
+                      <div class="component" draggable="true" data-component-type="LinearLayout">LinearLayout</div>
+                      <div class="component" draggable="true" data-component-type="FrameLayout">FrameLayout</div>
+                      <div class="component" draggable="true" data-component-type="ConstraintLayout">ConstraintLayout</div>
+                    </div>
+                  </div>
             </aside>
             <main id="device-preview">
                 <img id="device-image" src="phone.png" alt="Device Preview">
