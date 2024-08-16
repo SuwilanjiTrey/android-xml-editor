@@ -14,15 +14,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const componentVisuals = {
         Button: '[ Button ]',
         TextView: '[ Text ]',
-        ImageView: '[ Image ]',
+        ImageView: 'assets/image.png',
         PlainText: '[ _____ ]',
         Password: '[ ***** ]',
         Email: '[ user@example.com ]',
-        ProgressBar: '[======    ]',
+        ProgressBar: 'assets/progress_bar.png',
         SeekBar: '[---------O]',
-        RatingBar: '[ ★★★☆☆ ]',
-        Switch: '[ ON | OFF ]',
-        CheckBox: '[ ✓ ]',
+        RatingBar: 'assets/rating_bar.png',
+        Switch: 'assets/switch_off.png',
+        CheckBox: 'assets/checkbox_off.png',
         RadioButton: '( • )',
         // Add more components as needed
     };
@@ -61,18 +61,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.value === 'phone') {
             componentContainer.style.position = 'absolute';
             componentContainer.style.top = '16.5%';
-            componentContainer.style.left = '31.58%';
-            componentContainer.style.width = '35.56%';
+            componentContainer.style.left = '28.88%';
+            componentContainer.style.width = '41.86%';
             componentContainer.style.height = '66.5%';
             componentContainer.style.border = '1px solid #ccc';
         } else if (e.target.value === 'tablet') {
             // Reset to default styles if needed when not a tablet
             componentContainer.style.position = 'absolute';
-            componentContainer.style.top = '21.5%';
+            componentContainer.style.top = '25.25%';
             componentContainer.style.left = '27.64%';
             componentContainer.style.width = '44.5%';
-            componentContainer.style.height = '57.5%';
+            componentContainer.style.height = '49.25%';
             componentContainer.style.border = '1px solid #ccc';
+            componentContainer.style.borderRadius = '10px';
         } else {
             // Reset to default styles if needed when not a tablet
             componentContainer.style.position = 'absolute';
@@ -106,7 +107,7 @@ function createComponent(type, x, y) {
     component.style.top = `${y}px`;
     component.style.minWidth = '100px';
     component.style.minHeight = '50px';
-    component.style.backgroundColor = '#f0f0f0';
+    component.style.backgroundColor = 'rgb(240 240 240 / 0%)';
     component.style.border = '1px solid #ccc';
     component.style.display = 'flex';
     component.style.alignItems = 'center';
@@ -115,10 +116,13 @@ function createComponent(type, x, y) {
     component.dataset.componentType = type;
     component.attributesData = { ...defaultAttributes[type] };
 
-    // Create a container for the visual representation
-    const visualContainer = document.createElement('div');
+
+    const visualContainer = document.createElement('img');
     visualContainer.className = 'component-visual';
-    visualContainer.textContent = componentVisuals[type] || type;
+    visualContainer.src = componentVisuals[type] || '/images/default.png';
+    visualContainer.style.maxWidth = '100%';
+    visualContainer.style.maxHeight = '100%';
+    visualContainer.style.objectFit = 'contain';
     component.appendChild(visualContainer);
 
     // Add resize handles
