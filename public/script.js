@@ -14,15 +14,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const componentVisuals = {
         Button: '[ Button ]',
         TextView: '[ Text ]',
-        ImageView: '[ Image ]',
+        ImageView: 'assets/image.png',
         PlainText: '[ _____ ]',
         Password: '[ ***** ]',
         Email: '[ user@example.com ]',
-        ProgressBar: '[======    ]',
+        ProgressBar: 'assets/progress_bar.png',
         SeekBar: '[---------O]',
-        RatingBar: '[ ★★★☆☆ ]',
-        Switch: '[ ON | OFF ]',
-        CheckBox: '[ ✓ ]',
+        RatingBar: 'assets/rating_bar.png',
+        Switch: 'assets/switch_off.png',
+        CheckBox: 'assets/checkbox_off.png',
         RadioButton: '( • )',
         // Add more components as needed
     };
@@ -115,10 +115,13 @@ function createComponent(type, x, y) {
     component.dataset.componentType = type;
     component.attributesData = { ...defaultAttributes[type] };
 
-    // Create a container for the visual representation
-    const visualContainer = document.createElement('div');
+
+    const visualContainer = document.createElement('img');
     visualContainer.className = 'component-visual';
-    visualContainer.textContent = componentVisuals[type] || type;
+    visualContainer.src = componentVisuals[type] || '/images/default.png';
+    visualContainer.style.maxWidth = '100%';
+    visualContainer.style.maxHeight = '100%';
+    visualContainer.style.objectFit = 'contain';
     component.appendChild(visualContainer);
 
     // Add resize handles
