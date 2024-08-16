@@ -25,7 +25,7 @@ body, html {
 
 aside {
     width: 200px;
-    background-color: #f9f9f9;
+    background-color: #8401ac94;
     padding: 10px;
     overflow-y: auto;
 }
@@ -45,7 +45,8 @@ aside {
 
 #component-container {
     position: relative;
-    min-height: 300px;  /* or whatever minimum height you want */
+    background-color: #ffffff;
+    /*min-height: 300px;  /* or whatever minimum height you want */
 }
 .component-visual {
     font-family: monospace;
@@ -59,7 +60,7 @@ aside {
     cursor: move;
     padding: 5px;
     margin: 5px 0;
-    background-color: #e0e0e0;
+    background-color: #76f7e5;
     list-style-type: none;
 }
 
@@ -76,9 +77,11 @@ footer {
 .component {
     padding: 5px;
     margin: 2px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
+    color: #f0f0f0;
+    background-color: #313131;
+    border: 1px solid #8a00e6;
     cursor: move;
+    border-radius: 10px;
 }
 
 .component {
@@ -102,7 +105,7 @@ footer {
 
 .component.selected {
     border: 2px solid blue;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
 #components-bar {
