@@ -12,23 +12,25 @@ document.addEventListener('DOMContentLoaded', () => {
     let selectedComponent = null;
 
     const componentVisuals = {
-        Button: '[ Button ]',
-        TextView: '[ Text ]',
+        Button: 'assets/button.png',
+        TextView: 'assets/text_view.png',
         ImageView: 'assets/image.png',
-        PlainText: '[ _____ ]',
-        Password: '[ ***** ]',
-        Email: '[ user@example.com ]',
+        PlainText: 'assets/text_view.png',
+        Password: 'assets/password.png',
+        Email: 'assets/email.png',
         ProgressBar: 'assets/progress_bar.png',
-        SeekBar: '[---------O]',
+        SeekBar: 'assets/seek_bar.png',
         RatingBar: 'assets/rating_bar.png',
         Switch: 'assets/switch_off.png',
         CheckBox: 'assets/checkbox_off.png',
-        RadioButton: '( • )',
+        RadioButton: 'assets/radio.png',
+        RecyclerView: 'assets/recycler_view.png'
         // Add more components as needed
     };
     // Define default attributes for each component type
     const defaultAttributes = {
         Button: { text: 'Button', textSize: '14sp', layout_width: 'wrap_content', layout_height: 'wrap_content' },
+        RecyclerView: { text: 'Button', textSize: '14sp', layout_width: 'wrap_content', layout_height: 'wrap_content' },
         TextView: { text: 'TextView', textSize: '14sp', layout_width: 'wrap_content', layout_height: 'wrap_content' },
         ImageView: { src: '', layout_width: 'wrap_content', layout_height: 'wrap_content' },
         PlainText: { hint: 'Enter text', layout_width: 'match_parent', layout_height: 'wrap_content' },
