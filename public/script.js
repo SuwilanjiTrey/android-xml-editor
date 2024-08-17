@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const attributeEditor = document.getElementById('attribute-editor');
     const deviceSelect = document.getElementById('device-select');
     const devicePhone = document.getElementById('device-image');
+    
 
     let selectedComponent = null;
 
@@ -171,6 +172,7 @@ function updateAttributeEditor(attributes) {
     for (const [key, value] of Object.entries(attributes)) {
         const attributeDiv = document.createElement('div');
         attributeDiv.innerHTML = `
+        <br>
             <label>${key}</label>
             <input type="text" value="${value}" data-attribute="${key}">
         `;
@@ -190,14 +192,7 @@ function updateAttributeEditor(attributes) {
     });
 }
 
-function updateComponentVisual(component) {
-    const type = component.dataset.componentType;
-    const visualContainer = component.querySelector('.component-visual');
-    if (type === 'TextView' || type === 'Button') {
-        visualContainer.textContent = component.attributesData.text || componentVisuals[type];
-    }
-    // Add more specific updates for other component types as needed
-}
+
 
  function makeResizableAndDraggable(component) {
         const containerRect = componentContainer.getBoundingClientRect();
@@ -261,9 +256,13 @@ function updateComponentVisual(component) {
 
     function updateXmlOutput() {
         let xmlString = '<?xml version="1.0" encoding="utf-8"?>\n' +
-        '<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"\n' +
+        '<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"\n' +
+        'xmlns:app="http://schemas.android.com/apk/res-auto"\n' +
+        'xmlns:tools="http://schemas.android.com/tools"\n' + 
         '    android:layout_width="match_parent"\n' +
         '    android:layout_height="match_parent">\n' +
+        `    tools:context=".MainActivity">\n` +
+       
         '    <LinearLayout\n' +
         '        android:layout_width="match_parent"\n' +
         '        android:layout_height="wrap_content"\n' +
@@ -295,7 +294,7 @@ function updateComponentVisual(component) {
             
         });
     
-        xmlString += '</LinearLayout>\n </ScrollView>';
+        xmlString += '</LinearLayout>\n </androidx.constraintlayout.widget.ConstraintLayout>';
         xmlOutput.value = xmlString;
     }
 
