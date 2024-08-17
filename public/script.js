@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const componentContainer = document.getElementById('component-container');
     const xmlOutput = document.getElementById('xml-output');
     const saveBtn = document.getElementById('save-btn');
+    const savename = document.getElementById('savename');
     const attributeEditor = document.getElementById('attribute-editor');
     const deviceSelect = document.getElementById('device-select');
     const devicePhone = document.getElementById('device-image');
@@ -29,19 +30,22 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     // Define default attributes for each component type
     const defaultAttributes = {
-        Button: { text: 'Button', textSize: '14sp', layout_width: 'wrap_content', layout_height: 'wrap_content' },
-        RecyclerView: { text: 'Button', textSize: '14sp', layout_width: 'wrap_content', layout_height: 'wrap_content' },
-        TextView: { text: 'TextView', textSize: '14sp', layout_width: 'wrap_content', layout_height: 'wrap_content' },
-        ImageView: { src: '', layout_width: 'wrap_content', layout_height: 'wrap_content' },
-        PlainText: { hint: 'Enter text', layout_width: 'match_parent', layout_height: 'wrap_content' },
-        Password: { hint: 'Enter password', inputType: 'textPassword', layout_width: 'match_parent', layout_height: 'wrap_content' },
-        Email: { hint: 'Enter email', inputType: 'textEmailAddress', layout_width: 'match_parent', layout_height: 'wrap_content' },
-        ProgressBar: { style: 'android:style/Widget.ProgressBar.Horizontal', layout_width: 'match_parent', layout_height: 'wrap_content' },
-        SeekBar: { layout_width: 'match_parent', layout_height: 'wrap_content' },
-        RatingBar: { numStars: '5', layout_width: 'wrap_content', layout_height: 'wrap_content' },
-        LinearLayout: { orientation: 'vertical', layout_width: 'match_parent', layout_height: 'wrap_content' },
-        FrameLayout: { layout_width: 'match_parent', layout_height: 'wrap_content' },
-        ConstraintLayout: { layout_width: 'match_parent', layout_height: 'match_parent' }
+        Button: { id: '',text: 'Button', textSize: '14sp', layout_width: 'wrap_content', layout_height: 'wrap_content' },
+        RecyclerView: { id: '', textSize: '14sp', layout_width: 'wrap_content', layout_height: 'wrap_content' },
+        TextView: {id: '', text: 'TextView', textSize: '14sp', layout_width: 'wrap_content', layout_height: 'wrap_content' },
+        ImageView: { id: '',src: '', layout_width: '100dp', layout_height: '100dp' },
+        PlainText: { id: '',hint: 'Enter text', layout_width: 'match_parent', layout_height: 'wrap_content' },
+        Password: { id: '',hint: 'Enter password', inputType: 'textPassword', layout_width: 'match_parent', layout_height: 'wrap_content' },
+        Email: { id: '',hint: 'Enter email', inputType: 'textEmailAddress', layout_width: 'match_parent', layout_height: 'wrap_content' },
+        ProgressBar: { id: '',style: '?android:attr/progressBarStyleHorizontal', layout_width: 'match_parent', layout_height: 'wrap_content', progress: "50" },
+        SeekBar: { id: '',layout_width: 'match_parent', layout_height: 'wrap_content', max: "100", progress: "50"},
+        RatingBar: { id: '',numStars: '5', layout_width: 'wrap_content', layout_height: 'wrap_content' },
+        LinearLayout: { id: '',orientation: 'vertical', layout_width: 'match_parent', layout_height: 'wrap_content', rating: "3.5" },
+        FrameLayout: { id: '',layout_width: 'match_parent', layout_height: 'wrap_content' },
+        CheckBox: { id: '',layout_width: 'wrap_content', layout_height: 'wrap_content',text: "Check this box" },
+        Switch: { id: '',layout_width: 'wrap_content', layout_height: 'wrap_content',text: "Toggle Switch" },
+        RadioButton: { id: '',layout_width: 'wrap_content', layout_height: 'wrap_content',text: "Option 1", orientation: "vertical" },
+        ConstraintLayout: { id: '',layout_width: 'match_parent', layout_height: 'match_parent' }
     };
 
     componentsBar.addEventListener('dragstart', (e) => {
@@ -146,8 +150,20 @@ function createComponent(type, x, y) {
     });
 
     makeResizableAndDraggable(component);
+    updateComponentVisual(component);
 
     return component;
+}
+function updateComponentVisual(component) {
+    const type = component.dataset.componentType;
+    const visualContainer = component.querySelector('.component-visual');
+    if (type === 'TextView' || type === 'Button') {
+        visualContainer.textContent = component.attributesData.text || type;
+    } else if (type === 'ImageView') {
+        visualContainer.src = component.attributesData.src ? 
+            `assets/${component.attributesData.src}.png` : componentVisuals[type];
+    }
+    // Add more specific updates for other component types as needed
 }
 
 function updateAttributeEditor(attributes) {
@@ -210,8 +226,10 @@ function updateComponentVisual(component) {
                         Object.assign(event.target.dataset, { x, y, width, height });
 
                         // Update attributesData
-                        event.target.attributesData.layout_width = `${event.rect.width}px`;
-                        event.target.attributesData.layout_height = `${event.rect.height}px`;
+                        
+
+                        event.target.attributesData.layout_width = `${Math.round(event.rect.width / 2)}dp`;
+                        event.target.attributesData.layout_height = `${Math.round(event.rect.height / 2)}dp`;
 
                         updateXmlOutput();
                     }
@@ -242,27 +260,50 @@ function updateComponentVisual(component) {
 
 
     function updateXmlOutput() {
-        let xmlString = '<LinearLayout\n    android:layout_width="match_parent"\n    android:layout_height="match_parent"\n    android:orientation="vertical">\n\n';
-        
+        let xmlString = '<?xml version="1.0" encoding="utf-8"?>\n' +
+        '<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"\n' +
+        '    android:layout_width="match_parent"\n' +
+        '    android:layout_height="match_parent">\n' +
+        '    <LinearLayout\n' +
+        '        android:layout_width="match_parent"\n' +
+        '        android:layout_height="wrap_content"\n' +
+        '        android:orientation="vertical"\n' +
+        '        android:padding="16dp">\n\n';
+
         componentContainer.childNodes.forEach((component) => {
+            if (component.dataset.componentType === "RecyclerView"){
+            xmlString += `    <androidx.recyclerview.widget.RecyclerView \n`
+            } else {
             xmlString += `    <${component.dataset.componentType}\n`;
+        }
             for (const [key, value] of Object.entries(component.attributesData)) {
-                xmlString += `        android:${key}="${value}"\n`;
+                
+                if (key === "id"){
+                    xmlString += `        android:${key}= "@+id/${value}"\n`;
+                } else if (key === "src"){
+                    xmlString += `        android:${key}="@drawable/${value}"\n`;
+                } else {
+                    xmlString += `        android:${key}="${value}"\n`;
+                }
             }
-            xmlString += `        android:layout_x="${component.style.left}"\n`;
-            xmlString += `        android:layout_y="${component.style.top}"\n`;
-            xmlString += `        android:layout_width="${component.style.width || component.attributesData.layout_width}"\n`;
-            xmlString += `        android:layout_height="${component.style.height || component.attributesData.layout_height}" />\n\n`;
+                const layoutX = Math.round(parseFloat(component.style.left) / 2);
+                const layoutY = Math.round(parseFloat(component.style.top) / 2);
+               
+                xmlString += `        android:layout_x="${layoutX}dp"\n`;
+                xmlString += `        android:layout_y="${layoutY}dp"\n`;
+                xmlString += '            />\n\n';
+            
         });
     
-        xmlString += '</LinearLayout>';
+        xmlString += '</LinearLayout>\n </ScrollView>';
         xmlOutput.value = xmlString;
     }
 
     saveBtn.addEventListener('click', () => {
-        console.log('Saving XML:', xmlOutput.value);
-        alert('XML saved! (Check the console)');
+        const filename = savename.value.trim() || 'layout';
+        downloadXmlFile(filename);
     });
+    
 
     componentContainer.addEventListener('click', (e) => {
         if (e.target === componentContainer) {
@@ -273,4 +314,22 @@ function updateComponentVisual(component) {
             attributeEditor.innerHTML = '';
         }
     });
+    function downloadXmlFile(filename) {
+        const xmlContent = xmlOutput.value;
+        const blob = new Blob([xmlContent], { type: 'text/xml' });
+        const url = URL.createObjectURL(blob);
+    
+        const downloadLink = document.createElement('a');
+        downloadLink.href = url;
+        downloadLink.download = `${filename}.xml`;
+    
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    
+        URL.revokeObjectURL(url);
+    }
+
+    
+
 });
