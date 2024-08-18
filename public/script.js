@@ -76,10 +76,10 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (e.target.value === 'tablet') {
             // Reset to default styles if needed when not a tablet
             componentContainer.style.position = 'absolute';
-            componentContainer.style.top = '25.25%';
-            componentContainer.style.left = '24.34%';
-            componentContainer.style.width = '48.5%';
-            componentContainer.style.height = '49.25%';
+            componentContainer.style.top = '26.25%';
+            componentContainer.style.left = '27.74%';
+            componentContainer.style.width = '44.35%';
+            componentContainer.style.height = '47.25%';
             componentContainer.style.border = '1px solid #ccc';
             componentContainer.style.borderRadius = '10px';
         } else {
