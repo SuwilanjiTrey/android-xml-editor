@@ -224,8 +224,8 @@ function updateAttributeEditor(attributes) {
                         // Update attributesData
                         
 
-                        event.target.attributesData.layout_width = `${Math.round(event.rect.width / 2)}dp`;
-                        event.target.attributesData.layout_height = `${Math.round(event.rect.height / 2)}dp`;
+                        event.target.attributesData.layout_width = `${Math.round(event.rect.width / 2) * 2}dp`;
+                        event.target.attributesData.layout_height = `${Math.round(event.rect.height / 2)* 4}dp`;
 
                         updateXmlOutput();
                     }
@@ -286,8 +286,8 @@ function updateAttributeEditor(attributes) {
                     xmlString += `        android:${key}="${value}"\n`;
                 }
             }
-                const layoutX = Math.round(parseFloat(component.style.left) / 2);
-                const layoutY = Math.round(parseFloat(component.style.top) / 2);
+                const layoutX = Math.round(parseFloat(component.style.left) / 2) * 2;
+                const layoutY = Math.round(parseFloat(component.style.top) / 2) * 4;
                
                 xmlString += `        android:layout_x="${layoutX}dp"\n`;
                 xmlString += `        android:layout_y="${layoutY}dp"\n`;
