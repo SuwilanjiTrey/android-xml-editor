@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (e.target.value === 'phone') {
             componentContainer.style.position = 'absolute';
-            componentContainer.style.top = '16.5%';
+            componentContainer.style.top = '16.9%';
             componentContainer.style.left = '28.32%';
             componentContainer.style.width = '41.86%';
             componentContainer.style.height = '66.5%';
