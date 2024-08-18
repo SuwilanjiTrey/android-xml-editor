@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
             componentContainer.style.top = '16.9%';
             componentContainer.style.left = '28.32%';
             componentContainer.style.width = '41.86%';
-            componentContainer.style.height = '66.5%';
+            componentContainer.style.height = '65.4%';
             componentContainer.style.border = '1px solid #ccc';
             componentContainer.style.borderRadius = '10px'
         } else if (e.target.value === 'tablet') {
