@@ -45,7 +45,7 @@ aside {
 
 #component-container {
     position: relative;
-    background-color: #ffffff00;;
+    background-color: #ffffff00;
     /*min-height: 300px;  /* or whatever minimum height you want */
 }
 .constraint-line {
