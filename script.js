@@ -117,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
             componentContainer.style.left = '28.32%';
             componentContainer.style.width = '42.86%';
             componentContainer.style.height = '70.8%';
+            componentContainer.style.backgroundColor = '#ffffff00';
             componentContainer.style.border = '1px solid #ccc';
             componentContainer.style.borderRadius = '10px'
         } else if (e.target.value === 'tablet') {
@@ -126,6 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
             componentContainer.style.left = '27.74%';
             componentContainer.style.width = '44.35%';
             componentContainer.style.height = '53.85%';
+            componentContainer.style.backgroundColor = '#ffffff00';
             componentContainer.style.border = '1px solid #ccc';
             componentContainer.style.borderRadius = '10px';
         } else {
