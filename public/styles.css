@@ -45,8 +45,18 @@ aside {
 
 #component-container {
     position: relative;
-    background-color: #ffffff;;
+    background-color: #ffffff00;;
     /*min-height: 300px;  /* or whatever minimum height you want */
+}
+.constraint-line {
+    position: absolute;
+    height: 2px;
+    background-color: #007bff;
+    transform-origin: left center;
+    pointer-events: none;
+}
+.constraint-handle {
+    cursor: pointer;
 }
 .component-visual {
     font-family: monospace;
