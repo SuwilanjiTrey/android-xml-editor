@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Dependency Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { color: #333; }
+        label { display: block; margin-top: 10px; }
+        input[type="text"], select, textarea { width: 100%; padding: 8px; margin-top: 5px; }
+        button { background-color: #4CAF50; color: white; padding: 10px 15px; border: none; cursor: pointer; margin-top: 10px; }
+        button:hover { background-color: #45a049; }
+        #result { margin-top: 20px; border: 1px solid #ddd; padding: 10px; white-space: pre-wrap; }
+
+       .container .ai-buttons { margin-top: 10px; }
+        .ai-buttons button { margin-right: 10px; }
+        #loading { display: none; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Android Dependency Generator</h1>
+        <form id="dependencyForm">
+            <button onclick="testGeminiAPI()">Test Gemini API</button>
+            <label>select Ai Model</label>
+            <select class="ai-buttons" required>
+                <option type="button" id="geminiBtn">Generate with Gemini</option>
+                <option type="button" id="chatgptBtn">Generate with ChatGPT</option>
+                <option type="button" id="claudeBtn">Generate with Claude</option>
+            </select>
+            <label for="appType">App Type:</label>
+            <select id="appType" required>
+                <option value="">Select app type</option>
+                <option value="database">Database-driven</option>
+                <option value="networking">Networking-heavy</option>
+                <option value="ui">UI-focused</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="features">Features (comma-separated):</label>
+            <input type="text" id="features" placeholder="e.g., local storage, API calls, image processing">
+
+            <label for="androidVersion">Target Android Version:</label>
+            <input type="text" id="androidVersion" placeholder="e.g., 11+" required>
+
+            <label for="additionalRequirements">Additional Requirements:</label>
+            <textarea id="additionalRequirements" rows="4" placeholder="Any other specific requirements or libraries needed"></textarea>
+
+            <button type="submit">Generate Dependencies</button>
+        </form>
+
+        <div id="loading">Generating dependencies...</div>
+        <div id="result"></div>
+    </div>
+
+    <script src = "AI.js"></script>
+</body>
+</html>
