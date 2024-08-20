@@ -1,5 +1,5 @@
 // Replace these with your actual API keys
-const GEMINI_API_KEY = 'AIzaSyDsDuk-5oRzd0KlVDsqBwGCDpEPStG5Udo';
+const GEMINI_API_KEY = '';
 const CHATGPT_API_KEY = 'your-chatgpt-api-key';
 const CLAUDE_API_KEY = 'your-claude-api-key';
 
