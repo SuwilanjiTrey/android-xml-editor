@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini API Test</title>
+</head>
+<body>
+    <h1>Test Gemini API</h1>
+    <form id="apiTestForm">
+        <label for="prompt">Enter your prompt:</label><br>
+        <input type="text" id="prompt" name="prompt" value="Explain how AI works"><br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>Response:</h2>
+    <pre id="responseOutput"></pre>
+
+    <script>
+        document.getElementById('apiTestForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const apiKey = 'AIzaSyA4f2knBQgkDcZksKAX3NNXyJfVxl6EEoY'; // Replace with your actual API key
+            const prompt = document.getElementById('prompt').value;
+
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
+
+            const requestBody = {
+                contents: [
+                    {
+                        parts: [
+                            { text: prompt }
+                        ]
+                    }
+                ]
+            };
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+
+                const data = await response.json();
+                document.getElementById('responseOutput').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('responseOutput').textContent = 'Error: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Dependency Generator (Gemini 1.5)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        form {
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        select, input[type="submit"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 20px;
+            background: #e9e9e9;
+            border-radius: 8px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>Android Dependency Generator (OpenAI)</h1>
+    <form id="dependencyForm">
+        <label for="appType">Application Type:</label>
+        <select id="appType" required>
+            <option value="">Select app type</option>
+            <option value="database-driven">Database-driven</option>
+            <option value="networking">Networking</option>
+            <option value="ui-heavy">UI-heavy</option>
+            <option value="multimedia">Multimedia</option>
+        </select>
+
+        <label for="features">Features (hold Ctrl/Cmd to select multiple):</label>
+        <select id="features" multiple required>
+            <option value="Room">Room Database</option>
+            <option value="Retrofit">Retrofit for Networking</option>
+            <option value="Glide">Glide for Image Loading</option>
+            <option value="ExoPlayer">ExoPlayer for Media Playback</option>
+            <option value="WorkManager">WorkManager for Background Tasks</option>
+        </select>
+
+        <label for="targetAndroidVersion">Target Android Version:</label>
+        <select id="targetAndroidVersion" required>
+            <option value="">Select Android version</option>
+            <option value="11">Android 11 (API 30)</option>
+            <option value="12">Android 12 (API 31)</option>
+            <option value="13">Android 13 (API 33)</option>
+            <option value="14">Android 14 (API 34)</option>
+        </select>
+
+        <input type="submit" value="Generate Dependencies">
+    </form>
+
+    <div id="result"></div>
+
+    <script src="AI.js"></script>
+</body>
+</html>
