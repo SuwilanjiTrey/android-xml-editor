@@ -20,7 +20,7 @@
         document.getElementById('apiTestForm').addEventListener('submit', async function(event) {
             event.preventDefault();
 
-            const apiKey = 'AIzaSyA4f2knBQgkDcZksKAX3NNXyJfVxl6EEoY'; // Replace with your actual API key
+            const apiKey = ''; // Replace with your actual API key
             const prompt = document.getElementById('prompt').value;
 
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
