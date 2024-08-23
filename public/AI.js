@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyA4f2knBQgkDcZksKAX3NNXyJfVxl6EEoY'
+//const API_KEY = ''
 
 async function handleSubmit(event) {
     event.preventDefault();
