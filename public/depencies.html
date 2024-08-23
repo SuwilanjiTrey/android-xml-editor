@@ -3,77 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Android Dependency Generator (Gemini 1.5)</title>
+    <title>Android Dependency Generator</title>
     <style>
-        body {
+        body, html {
             font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
-            padding: 20px;
-            max-width: 800px;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #e94560;
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        .form-container {
+            width: 45%;
+        }
+        h1 {
+            color: #e94560;
+            text-align: center;
+            margin-bottom: 30px;
         }
         form {
-            background: #f4f4f4;
+            background: rgba(22, 22, 22, 0.719);
             padding: 20px;
             border-radius: 8px;
+            box-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
+            animation: glow 2s infinite alternate;
+        }
+        button{
+        background: rgba(22, 22, 22, 0.719);
+            padding: 5px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(1, 66, 15, 0.5);
+            animation: glow 2s infinite alternate;
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 10px rgba(233, 69, 96, 0.5); }
+            to { box-shadow: 0 0 20px rgba(233, 69, 96, 0.8); }
         }
         label {
             display: block;
             margin-bottom: 5px;
+            color: #e94560;
         }
-        select, input[type="submit"] {
+        select, input[type="submit"], textarea {
             width: 100%;
             padding: 8px;
             margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #e94560;
+            color: #e94560;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background: #e94560;
+            color: #1a1a2e;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        input[type="submit"]:hover {
+            background: #ff6b6b;
         }
         #result {
-            margin-top: 20px;
-            padding: 20px;
-            background: #e9e9e9;
+            width: 45%;
+            height: 80vh;
+            overflow-y: auto;
+            background: rgba(19, 1, 1, 0.925);
             border-radius: 8px;
-            white-space: pre-wrap;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(233, 69, 96, 0.5);
+            animation: glow 2s infinite alternate;
+        }
+        .icon {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            opacity: 0.5;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <h1>Android Dependency Generator (OpenAI)</h1>
-    <form id="dependencyForm">
-        <label for="appType">Application Type:</label>
-        <select id="appType" required>
-            <option value="">Select app type</option>
-            <option value="database-driven">Database-driven</option>
-            <option value="networking">Networking</option>
-            <option value="ui-heavy">UI-heavy</option>
-            <option value="multimedia">Multimedia</option>
-        </select>
+    <div class="background" id="icon-container"></div>
+    <div class="container">
+       
+        <div class="form-container">
+            <button title="Build XML UI?">
+            <a href="index.html" style="color: aliceblue;">
+                <i class='fas fa-code'></i>
+              Build XML UI?
+              <i class='fas fa-bug'></i>
+              </a></button>
+            <h1>Android Dependency Generator (Gemini 1.5)</h1>
+            <form id="dependencyForm">
+                <label for="appType">Application Type:</label>
+                <select id="appType" required>
+                    <option value="">Select app type</option>
+                    <option value="database-driven">Database-driven</option>
+                    <option value="networking">Networking</option>
+                    <option value="ui-heavy">UI-heavy</option>
+                    <option value="multimedia">Multimedia</option>
+                </select>
 
-        <label for="features">Features (hold Ctrl/Cmd to select multiple):</label>
-        <select id="features" multiple required>
-            <option value="Room">Room Database</option>
-            <option value="Retrofit">Retrofit for Networking</option>
-            <option value="Glide">Glide for Image Loading</option>
-            <option value="ExoPlayer">ExoPlayer for Media Playback</option>
-            <option value="WorkManager">WorkManager for Background Tasks</option>
-        </select>
+                <label for="features">Features (hold Ctrl/Cmd to select multiple):</label>
+                <select id="features" multiple required>
+                    <option value="Room">Room Database</option>
+                    <option value="Retrofit">Retrofit for Networking</option>
+                    <option value="Glide">Glide for Image Loading</option>
+                    <option value="ExoPlayer">ExoPlayer for Media Playback</option>
+                    <option value="WorkManager">WorkManager for Background Tasks</option>
+                </select>
 
-        <label for="targetAndroidVersion">Target Android Version:</label>
-        <select id="targetAndroidVersion" required>
-            <option value="">Select Android version</option>
-            <option value="11">Android 11 (API 30)</option>
-            <option value="12">Android 12 (API 31)</option>
-            <option value="13">Android 13 (API 33)</option>
-            <option value="14">Android 14 (API 34)</option>
-        </select>
+                <label for="targetAndroidVersion">Target Android Version:</label>
+                <select id="targetAndroidVersion" required>
+                    <option value="">Select Android version</option>
+                    <option value="11">Android 11 (API 30)</option>
+                    <option value="12">Android 12 (API 31)</option>
+                    <option value="13">Android 13 (API 33)</option>
+                    <option value="14">Android 14 (API 34)</option>
+                </select>
 
-        <textarea type="text" id="additional info" placeholder="add additional features or more context about your app" style="width: 100%; height: 100%;"></textarea>
+                <textarea id="additional-info" placeholder="Add additional features or more context about your app" rows="4"></textarea>
 
-        <input type="submit" value="Generate Dependencies">
-
-    </form>
-
-    <div id="result"></div>
+                <input type="submit" value="Generate Dependencies">
+            </form>
+        </div>
+        <div id="result">
+            Your generated dependencies will appear here...
+        </div>
+    </div>
 
     <script src="AI.js"></script>
+    <script>
+         const icons = [
+            // Kotlin icon
+            '<svg viewBox="0 0 24 24" fill="#e94560"><path d="M1.3,24l11.3-11.5L24,24H1.3z M0,0h12L0,12.5V0z M13.4,0L0,14v10l12-12L24,0H13.4z"/></svg>',
+            // Gradle icon
+            '<svg viewBox="0 0 24 24" fill="#e94560"><path d="M22.695 4.297a3.807 3.807 0 0 0-5.29-.09l-7.792 7.793-2.97-2.97a1.387 1.387 0 0 0-1.96 0l-.177.178a1.387 1.387 0 0 0 0 1.96l3.854 3.854a1.387 1.387 0 0 0 1.96 0l8.675-8.675a3.807 3.807 0 0 0 .09-5.29zM8.36 18.365a1.62 1.62 0 1 1-2.29-2.29 1.62 1.62 0 0 1 2.29 2.29zM3.337 13.34a1.62 1.62 0 1 1-2.29-2.29 1.62 1.62 0 0 1 2.29 2.29z"/></svg>',
+            // Code icon
+            '<svg viewBox="0 0 24 24" fill="#e94560"><path d="M8.293 6.293 2.586 12l5.707 5.707 1.414-1.414L5.414 12l4.293-4.293zm7.414 11.414L21.414 12l-5.707-5.707-1.414 1.414L18.586 12l-4.293 4.293z"/></svg>',
+            // Bug icon
+            '<svg viewBox="0 0 24 24" fill="#e94560"><path d="M19 7h-2.81c-.45-.78-1.07-1.45-1.82-1.96L16 3.41 14.59 2l-2.17 2.17C12.28 4.07 12.14 4 12 4s-.28.07-.41.17L9.41 2 8 3.41l1.62 1.63C8.87 5.55 8.26 6.22 7.81 7H5v2h1.09c-.05.33-.09.66-.09 1v1H5v2h1v1c0 .34.04.67.09 1H5v2h2.81c1.04 1.79 2.97 3 5.19 3s4.15-1.21 5.19-3H20v-2h-1.09c.05-.33.09-.66.09-1v-1h1v-2h-1v-1c0-.34-.04-.67-.09-1H20V7zm-6 8h-2v-2h2v2zm0-4h-2V9h2v2z"/></svg>'
+        ];
+
+        function createIcon() {
+            const icon = document.createElement('div');
+            icon.className = 'icon';
+            icon.style.left = `${Math.random() * 100}%`;
+            icon.style.animationDuration = `${Math.random() * 3 + 2}s`;
+            icon.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            document.getElementById('icon-container').appendChild(icon);
+
+            icon.addEventListener('animationiteration', () => {
+                icon.remove();
+                createIcon();
+            });
+        }
+
+        for (let i = 0; i < 10; i++) {
+            createIcon();
+        }
+    </script>
 </body>
 </html>

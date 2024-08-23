@@ -7,7 +7,7 @@ async function handleSubmit(event) {
     const targetAndroidVersion = document.getElementById('targetAndroidVersion').value;
     let prompt = `Generate Android app dependencies for a ${appType} app with the following features: ${features.join(', ')}. Target Android version: ${targetAndroidVersion}. Provide the dependencies in Gradle KOTLIN format.`;
 
-    const additional_input = document.getElementById('additional info').value;
+    const additional_input = document.getElementById('additional-info').value;
     if (additional_input !== null && additional_input.trim() !== '') {
         prompt += ` Here's some additional information about the app: ${additional_input}`;
     }
