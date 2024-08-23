@@ -1,14 +1,10 @@
-// Replace these with your actual API keys
-
-// Function to handle form submission
-require('dotenv').config();
 async function handleSubmit(event) {
     event.preventDefault();
     const appType = document.getElementById('appType').value;
     const features = Array.from(document.getElementById('features').selectedOptions).map(option => option.value);
     const targetAndroidVersion = document.getElementById('targetAndroidVersion').value;
     const prompt = `Generate Android app dependencies for a ${appType} app with the following features: ${features.join(', ')}. Target Android version: ${targetAndroidVersion}. Provide the dependencies in Gradle format.`;
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${process.env.API_KEY}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`;
     const requestBody = {
         contents: [
             {
