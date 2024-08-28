@@ -1,5 +1,3 @@
 # android-xml-editor
 
 JNSK
-
-
