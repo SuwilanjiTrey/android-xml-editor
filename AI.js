@@ -1,4 +1,4 @@
-//const API_KEY = ''
+const API_KEY = 'AIzaSyA4f2knBQgkDcZksKAX3NNXyJfVxl6EEoY'
 
 async function handleSubmit(event) {
     event.preventDefault();
@@ -22,6 +22,7 @@ async function handleSubmit(event) {
             }
         ]
     };
+    
     console.log('Sending prompt:', prompt);
     try {
         const response = await fetch(url, {
@@ -45,6 +46,8 @@ async function handleSubmit(event) {
 
         // Display the formatted text
         document.getElementById('result').innerHTML = formattedText;
+        console.log(formattedText);
+
     } catch (error) {
         document.getElementById('result').textContent = 'Error: ' + error.message;
     }
