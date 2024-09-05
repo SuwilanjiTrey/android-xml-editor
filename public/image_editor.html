@@ -28,10 +28,15 @@
             text-align: center;
             margin-bottom: 1.5rem;
         }
-        a {
+        .button {
             color: #4c6baf;
             text-align: center;
             margin-bottom: 1.5rem;
+            background-color: #4c6baf;
+            border-radius: 100px;
+            width: 50px;
+            height: 50px;
+
         }
         .upload-area {
             border: 2px dashed #4CAF50;
@@ -106,7 +111,7 @@
 <body>
     <div class="container">
         <h1>Android Image Editor</h1>
-        <button><a href="index.html">back to editor</a></button>
+        <button id = "button"></button>
         <div class="upload-area" id="dropArea">
             <p>Drag & Drop your image here or click to select</p>
         </div>
